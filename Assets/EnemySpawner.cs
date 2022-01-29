@@ -25,7 +25,10 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Get All Spawn Locations as part of the
+    /// parent Spawner
+    /// </summary>
     private void GetSpawnLocations()
     {
         foreach (Transform spawner in this.transform)
@@ -34,6 +37,10 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Get all spawners as a interger list to
+    /// determine the location of each spawner
+    /// </summary>
     private void GetSpawnersAvailable()
     {
         int spawnerNumber = 0;
