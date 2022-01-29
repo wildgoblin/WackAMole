@@ -65,15 +65,40 @@ public class EnemySpawner : MonoBehaviour
         while (spawn)
         {
 
-
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
 
-            int spawner = Random.Range(0, spawners.Count); // Get random spawner
-            Instantiate(
-                enemyPrefab,
-                spawners[spawner].transform.position, // at random spawner location
-                transform.rotation, // Don't change rotation
-                spawners[spawner].transform); // Child new object under spawner
+            if (spawnersAvailable.Count == 0) { Debug.Log("No Spawners Available"); }
+            else
+            {
+                //Get random spawn location out of AvailableSpawners
+                int randomSpawner = Random.Range(0, spawnersAvailable.Count);
+                int spawnerLocation = spawnersAvailable[randomSpawner];
+                //Spawn bunny
+                GameObject bunny = Instantiate(
+                    enemyPrefab,
+                    spawners[spawnerLocation].transform.position, // at random spawner location
+                    transform.rotation, // Don't change rotation
+                    spawners[spawnerLocation].transform); // Child new object under spawner
+
+                bunny.GetComponent<Bunny>().position = spawnerLocation;
+                //Update Available spawners
+                AddToAvailableSpawners(spawnerLocation);
+            }
         }
     }
+
+    private void RemoveFromAvailableSpawners(int spawnerLocation)
+    {
+        if(spawnersAvailable.Count != 0)
+        {
+            spawnersAvailable.Remove(spawnerLocation);
+        }
+        else { Debug.Log("No spawners are available"); }
+    }
+
+    private void AddToAvailableSpawners(int spawnerLocation)
+    {
+        return;
+    }
+
 }
