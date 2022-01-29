@@ -52,7 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9478027f918ae4cb6029f81e606e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 361336144282948463, guid: 7d83543f8c6629d4f88d9e10b3dc368b, type: 3}
+  hitSFX:
+  - {fileID: 8300000, guid: 45a8cacf88a3b7b4993c1e89f4ecc42d, type: 3}
+  - {fileID: 8300000, guid: 8515e549814031c49a58cc268ee6d6f6, type: 3}
+  saveSFX:
+  - {fileID: 8300000, guid: 6953c9a5b5be3994db5b3f621910a8df, type: 3}
+  - {fileID: 8300000, guid: 668f99c42c403244b9bd47a4dfe032a7, type: 3}
   timeBeforeDestroy: 1
   position: 0
 --- !u!222 &648589529759592156

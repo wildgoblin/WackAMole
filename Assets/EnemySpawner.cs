@@ -72,9 +72,11 @@ public class EnemySpawner : MonoBehaviour
             {
                 //Choose Random Bunny to spawn
                 int randomBunny = Random.Range(0, enemyPrefab.Length);
+                
                 //Get random spawn location out of AvailableSpawners
                 int randomSpawner = Random.Range(0, spawnersAvailable.Count);
                 int spawnerLocation = spawnersAvailable[randomSpawner];
+                
                 //Spawn bunny
                 GameObject bunny = Instantiate(
                     enemyPrefab[randomBunny],
