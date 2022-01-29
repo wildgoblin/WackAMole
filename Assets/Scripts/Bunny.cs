@@ -19,6 +19,7 @@ public class Bunny : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
         
         yield return new WaitForSeconds(timeBeforeDestroy);
+        enemySpawner.GetComponent<EnemySpawner>().AddToAvailableSpawners(position);
         Destroy(gameObject);
     }
     

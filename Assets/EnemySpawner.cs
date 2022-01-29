@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject[] enemyPrefab;
     [SerializeField] int minSpawnDelay;
     [SerializeField] int maxSpawnDelay;
 
@@ -70,19 +70,21 @@ public class EnemySpawner : MonoBehaviour
             if (spawnersAvailable.Count == 0) { Debug.Log("No Spawners Available"); }
             else
             {
+                //Choose Random Bunny to spawn
+                int randomBunny = Random.Range(0, enemyPrefab.Length);
                 //Get random spawn location out of AvailableSpawners
                 int randomSpawner = Random.Range(0, spawnersAvailable.Count);
                 int spawnerLocation = spawnersAvailable[randomSpawner];
                 //Spawn bunny
                 GameObject bunny = Instantiate(
-                    enemyPrefab,
+                    enemyPrefab[randomBunny],
                     spawners[spawnerLocation].transform.position, // at random spawner location
                     transform.rotation, // Don't change rotation
                     spawners[spawnerLocation].transform); // Child new object under spawner
 
                 bunny.GetComponent<Bunny>().position = spawnerLocation;
                 //Update Available spawners
-                AddToAvailableSpawners(spawnerLocation);
+                RemoveFromAvailableSpawners(spawnerLocation);
             }
         }
     }
@@ -93,12 +95,15 @@ public class EnemySpawner : MonoBehaviour
         {
             spawnersAvailable.Remove(spawnerLocation);
         }
-        else { Debug.Log("No spawners are available"); }
+        
     }
 
-    private void AddToAvailableSpawners(int spawnerLocation)
+    public void AddToAvailableSpawners(int spawnerLocation)
     {
-        return;
+        spawnersAvailable.Add(spawnerLocation);
+        Debug.Log("Added Spawner Number: " + spawnerLocation);
+        Debug.Log("Spawner Count: " + spawnersAvailable.Count);
+
     }
 
 }

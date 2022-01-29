@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9478027f918ae4cb6029f81e606e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 361336144282948463, guid: 7d83543f8c6629d4f88d9e10b3dc368b, type: 3}
   timeBeforeDestroy: 1
   position: 0
 --- !u!222 &648589529759592156
@@ -103,7 +103,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 43e6c4562ab4c4143add33e6b508222f, type: 3}
+  m_Sprite: {fileID: 1302723820812287101, guid: bd4a534f6c7d55c49a9b179d2c3c0aab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,7 +148,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 648589529759592158}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fe41d9c62953e1e42af77b546ee0318d, type: 2}
   m_CullingMode: 0
