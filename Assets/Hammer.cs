@@ -2,13 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hammer : MonoBehaviour, IHammer
-{
-    
-    [SerializeField] public string hammerType { get; set; }
+public class Hammer : MonoBehaviour
+{ 
 
-    public void Initialize()
+    [SerializeField] string type;
+
+    //References
+    GameController gameController;
+    void Awake()
     {
-        hammerType = hammerType;
+        //Set References
+         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+
     }
+    void OnMouseDown()
+    {
+    gameController.SetHammerType(type);
+    }
+
+
 }

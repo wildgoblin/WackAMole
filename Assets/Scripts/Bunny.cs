@@ -6,7 +6,9 @@ public class Bunny : MonoBehaviour
 {
     //References
     EnemySpawner enemySpawner;
+    GameController gameController;
 
+    [SerializeField] string type;
     [SerializeField] AudioClip[] hitSFX;
     [SerializeField] AudioClip[] saveSFX;
 
@@ -17,7 +19,7 @@ public class Bunny : MonoBehaviour
     {
         //Set References
         enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
-        Debug.Log(enemySpawner);
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         // Check for missing Audio
         foreach(AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
@@ -25,6 +27,7 @@ public class Bunny : MonoBehaviour
 
     void OnMouseDown()
     {
+        
         StartCoroutine(Hit());
     }
 
