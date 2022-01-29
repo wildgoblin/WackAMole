@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Bunny : MonoBehaviour
 {
+    /*
     void OnMouseDown()
     {
         GetComponent<SpriteRenderer>().color = Color.red;
     }
-
+    */
 
 }

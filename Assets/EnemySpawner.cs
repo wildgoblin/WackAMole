@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
             int spawner = Random.Range(0, spawners.Count);
-            GameObject newBunny = Instantiate(enemyPrefab, spawners[spawner].transform.position, Quaternion.identity) as GameObject;
+            Instantiate(enemyPrefab, spawners[spawner].transform.position, transform.rotation, spawners[spawner].transform);
         }
     }
 }
