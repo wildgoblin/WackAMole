@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9478027f918ae4cb6029f81e606e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: fire
   hitSFX:
   - {fileID: 8300000, guid: 4baaeaee0c4ca984c9ec42837f88a094, type: 3}
   - {fileID: 8300000, guid: 165ccd3e50dd6a543a2b758beb50bc0b, type: 3}

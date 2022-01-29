@@ -7,6 +7,7 @@ public class Bunny : MonoBehaviour
     //References
     EnemySpawner enemySpawner;
     GameController gameController;
+    SpriteRenderer spriteRenderer;
 
     [SerializeField] string type;
     [SerializeField] AudioClip[] hitSFX;
@@ -20,26 +21,41 @@ public class Bunny : MonoBehaviour
         //Set References
         enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
         // Check for missing Audio
-        foreach(AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
+        foreach (AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
     }
 
     void OnMouseDown()
     {
-        
         StartCoroutine(Hit());
     }
 
     private IEnumerator Hit()
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        // If NO type then play fail routine
+        if (gameController.GetHammerType() == null)
+        {
+            spriteRenderer.color = Color.red;
+        }
+        // If the Type is the same play the success Hit routine
+        else if (gameController.GetHammerType() == type)
+        {
+            spriteRenderer.color = Color.green;
 
-        PlayHitSFX();
+            PlayHitSFX();
 
-        yield return new WaitForSeconds(timeBeforeDestroy);
-        enemySpawner.AddToAvailableSpawners(position);
-        Destroy(gameObject);
+            yield return new WaitForSeconds(timeBeforeDestroy);
+            enemySpawner.AddToAvailableSpawners(position);
+            Destroy(gameObject);
+        }
+        // If Type is different
+        else if (gameController.GetHammerType() != type)
+        {
+            spriteRenderer.color = Color.blue;
+        }
+        
+
     }
 
     private void PlayHitSFX()

@@ -17,7 +17,7 @@ public class Hammer : MonoBehaviour
     }
     void OnMouseDown()
     {
-    gameController.SetHammerType(type);
+        gameController.SetHammerType(type);
     }
 
 

@@ -16,4 +16,9 @@ public class GameController : MonoBehaviour
         hammerType = type;
     }
 
+    public string GetHammerType()
+    {
+        return hammerType;
+    }
+
 }
