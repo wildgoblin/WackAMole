@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject leftCurtain;
     [SerializeField] GameObject rightCurtain;
 
+    [SerializeField] GameObject mainStartScreen;
+
     List<int> spawnersAvailable = new List<int>();
 
     bool gameStarted = false;
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour
     public void StartGame()
     {
         gameStarted = true;
+        mainStartScreen.active = false;
         SpawnLives();
         SpawnHats();
         StartCoroutine(LoadMainGame(revealTimeDelay));
