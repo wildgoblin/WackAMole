@@ -110,8 +110,10 @@ public class Bunny : MonoBehaviour
                 //Play Allowance Effects
                 StartCoroutine(ChangeColor(Color.red));
 
+                gameController.LoseALife();
+
                 //Wait for time then cleanup and destroy
-                yield return new WaitForSeconds(timeBeforeDestroy);
+                yield return new WaitForSeconds(failedHitTimeBeforeDestroy);
                 CleanUpAndDestroyObject();
             }
 

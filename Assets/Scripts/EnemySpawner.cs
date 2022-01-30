@@ -12,16 +12,13 @@ public class EnemySpawner : MonoBehaviour
 
     List<GameObject> spawners = new List<GameObject>();
 
-    bool spawn = true;
+    bool spawn = false;
 
     private void Start()
     {
         //Initilization
         GetSpawnLocations();
         GetSpawnersAvailable();
-
-        //Start Game
-        StartCoroutine(Spawn());
     }
 
 
@@ -105,4 +102,14 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void StartSpawning()
+    {
+        spawn = true;
+        StartCoroutine(Spawn());
+    }
+
+    public void StopSpawning()
+    {
+        spawn = false;
+    }
 }
