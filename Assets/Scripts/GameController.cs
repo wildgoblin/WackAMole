@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     [Header ("Lives")]
     [SerializeField] GameObject livesArea;
     [SerializeField] GameObject lifePrefab;
-    [SerializeField] GameObject noLifePrefab;
+    [SerializeField] Sprite noLifePrefab;
 
     [Header ("Hats Play Space")]
     [SerializeField] GameObject hatsArea;
@@ -118,7 +118,7 @@ public class GameController : MonoBehaviour
             Transform lifeToLose = livesArea.transform.GetChild(lives - 1);
 
             // Allowance Effects
-            lifeToLose.GetComponent<Image>().color = Color.black;
+            lifeToLose.GetComponent<Image>().sprite = noLifePrefab;
 
             // Data Adjust
             lives--;
