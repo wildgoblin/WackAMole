@@ -42,8 +42,10 @@ public class GameController : MonoBehaviour
         
         for (int i = 0; i < lives; i++)
         {
+            //Spawn Lives
             Instantiate(lifePrefab, livesArea.transform);
-            
+            // Hide lives
+            livesArea.transform.GetChild(i).GetComponent<Image>().enabled = false;
         }
     }
 
@@ -62,11 +64,24 @@ public class GameController : MonoBehaviour
 
     private IEnumerator LoadMainGame(float timeDelay)
     {
+        //Reveal Lives
+        int numberOfLives = livesArea.transform.childCount;
+        for (int i = 0; i < numberOfLives; i++)
+        {
+            Instantiate(CloudFX, livesArea.transform.GetChild(i).transform);
+            yield return new WaitForSeconds(timeDelay);
+            livesArea.transform.GetChild(i).GetComponent<Image>().enabled = true;
+            Destroy(livesArea.transform.GetChild(i).GetChild(0).gameObject);
+        }
+        //Open Curtains
         leftCurtain.GetComponent<Animator>().SetTrigger("openCurtain");
         rightCurtain.GetComponent<Animator>().SetTrigger("openCurtain");
         yield return new WaitForSeconds(3);
+
+
+
+        //Reveal Hats
         int numberOfHats = hatsArea.transform.childCount;
-        Debug.Log(hatsArea.transform.childCount);
         for (int i = 0; i < numberOfHats; i++)
         {
             int randomSpawner = Random.Range(0, spawnersAvailable.Count);

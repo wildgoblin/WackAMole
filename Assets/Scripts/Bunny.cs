@@ -48,6 +48,8 @@ public class Bunny : MonoBehaviour
     IEnumerator TimeBeforeDisappear()
     {
         yield return new WaitForSeconds(timeBeforeDisappear);
+        if (type == "") {  }
+        else { gameController.LoseALife(); }
         CleanUpAndDestroyObject();
     }
 
@@ -58,6 +60,7 @@ public class Bunny : MonoBehaviour
     void OnMouseDown()
     {
         Debug.Log("TYPE: " + type);
+        StopCoroutine(TimeBeforeDisappear());
         StartCoroutine(Hit());
     }
 
