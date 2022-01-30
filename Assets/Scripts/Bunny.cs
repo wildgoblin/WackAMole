@@ -18,6 +18,7 @@ public class Bunny : MonoBehaviour
     [SerializeField] SpriteRenderer bunnyHands;
 
     [SerializeField] float timeBeforeDestroy = 1;
+    [SerializeField] float failedHitTimeBeforeDestroy = 1;
     [SerializeField] float timeBeforeDisappear = 5;
     [SerializeField] float hitAllowanceTime = 0;
     bool availableToHit = true;
@@ -31,6 +32,8 @@ public class Bunny : MonoBehaviour
         enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+
         // Check for missing Audio
         foreach (AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
         bunnyHead = bunnyHead.GetComponent<SpriteRenderer>();
@@ -64,27 +67,50 @@ public class Bunny : MonoBehaviour
         if(availableToHit != false)
         {
             availableToHit = false;
-            // If NO type then play fail routine
+            
+            
+            //FAILHIT If NO type then play fail routine
             if (type == "")
             {
+                
+                //Play Allowance Effects
                 StartCoroutine(ChangeColor(Color.red));
-                yield return new WaitForSeconds(timeBeforeDestroy);
+                if (gameController.GetHammerType() == "fire")
+                {
+                    GetComponent<Animator>().SetTrigger("setFire");
+                }
+                if (gameController.GetHammerType() == "ice")
+                {
+                    GetComponent<Animator>().SetTrigger("setIce");
+                }
+
+                gameController.LoseALife();
+
+
+                yield return new WaitForSeconds(failedHitTimeBeforeDestroy);
                 CleanUpAndDestroyObject();
             }
-            // If the Type is the same play the success Hit routine
+            
+            //SUCCESSHIT If the Type is the opposite play the SUCCEESS Hit routine
             else if (gameController.GetHammerType() == oppositeType)
             {
+                //Play Allowance Effects
                 StartCoroutine(ChangeColor(Color.green));
-
+                GetComponent<Animator>().SetTrigger("saved");
                 PlayHitSFX();
 
+                //Wait for time then cleanup and destroy
                 yield return new WaitForSeconds(timeBeforeDestroy);
                 CleanUpAndDestroyObject();
             }
-            // If Type is different
+
+            //FAIL HIT If Type is different
             else if (gameController.GetHammerType() == type)
             {
+                //Play Allowance Effects
                 StartCoroutine(ChangeColor(Color.red));
+
+                //Wait for time then cleanup and destroy
                 yield return new WaitForSeconds(timeBeforeDestroy);
                 CleanUpAndDestroyObject();
             }

@@ -234,6 +234,7 @@ MonoBehaviour:
   bunnyHead: {fileID: 1349056064}
   bunnyHands: {fileID: 1578112879}
   timeBeforeDestroy: 0.3
+  failedHitTimeBeforeDestroy: 0.3
   timeBeforeDisappear: 5
   hitAllowanceTime: 0.1
   position: 0

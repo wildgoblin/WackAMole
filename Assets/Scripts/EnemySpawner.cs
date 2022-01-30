@@ -48,12 +48,11 @@ public class EnemySpawner : MonoBehaviour
         {            
             if (spawner.transform.childCount == 0)
             {
-                Debug.Log("Added: " + spawnerNumber);
                 spawnersAvailable.Add(spawnerNumber);
             }
             else
             {
-                Debug.Log("Something here: " + spawnerNumber);
+                Debug.Log("Add Something here: " + spawnerNumber);
             }
             spawnerNumber++;
         }
@@ -103,8 +102,6 @@ public class EnemySpawner : MonoBehaviour
     public void AddToAvailableSpawners(int spawnerLocation)
     {
         spawnersAvailable.Add(spawnerLocation);
-        Debug.Log("Added Spawner Number: " + spawnerLocation);
-        Debug.Log("Spawner Count: " + spawnersAvailable.Count);
 
     }
 

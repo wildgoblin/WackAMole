@@ -239,7 +239,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4e38eeb1efb9bf544a4cd81c452b363b, type: 3}
   bunnyHead: {fileID: 1882158293}
   bunnyHands: {fileID: 1662745420}
-  timeBeforeDestroy: 0.3
+  timeBeforeDestroy: 1
   timeBeforeDisappear: 5
   hitAllowanceTime: 0.1
   position: 0

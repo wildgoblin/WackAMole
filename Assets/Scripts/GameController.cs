@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     string hammerType;
+    [SerializeField] int lives = 3;
 
     public void SetHammerType(string type)
     {
@@ -15,5 +16,13 @@ public class GameController : MonoBehaviour
     {
         return hammerType;
     }
+
+    public void LoseALife()
+    {
+        lives--;
+        Debug.Log("Lives left" + lives);
+    }
+
+
 
 }
