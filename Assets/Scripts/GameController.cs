@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     string hammerType;
+    int score = 0;
     
     [SerializeField] int lives = 3;
     [SerializeField] int hats = 9;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject leftCurtain;
     [SerializeField] GameObject rightCurtain;
+    [SerializeField] GameObject scoreDisplay;
      float curtainDelayTime = 3; // Keep at 3, Animation is 3 seconds.
 
     [SerializeField] GameObject mainStartScreen;
@@ -33,6 +36,8 @@ public class GameController : MonoBehaviour
     bool gameStarted = false;
     EnemySpawner enemySpawner;
 
+
+
     void Start()
     {
         //References
@@ -41,6 +46,9 @@ public class GameController : MonoBehaviour
         // Initialize
         gameStarted = false;
         mainStartScreen.SetActive(true);
+        //Reset Score
+        score = 0;
+        AddToScoreAndUpdateDisplay(0);
     }
     public void StartGame()
     {
@@ -142,17 +150,11 @@ public class GameController : MonoBehaviour
 
     private IEnumerator LoadMainGame(float timeDelay)
     {
-        //Reveal Lives
 
-        /*int numberOfLives = livesArea.transform.childCount;
-        for (int i = 0; i < numberOfLives; i++)
-        {
-            Instantiate(CloudFX, livesArea.transform.GetChild(i).transform);
-            yield return new WaitForSeconds(timeDelay);
-            livesArea.transform.GetChild(i).GetComponent<Image>().enabled = true;
-            Destroy(livesArea.transform.GetChild(i).GetChild(0).gameObject);
-        }
-        */
+        // Reset Score
+        score = 0;
+        AddToScoreAndUpdateDisplay(0);
+
         SpawnLives();
         SpawnHats();
 
@@ -247,6 +249,12 @@ public class GameController : MonoBehaviour
     public bool GetGameStartState()
     {
         return gameStarted;
+    }
+
+    public void AddToScoreAndUpdateDisplay(int scoreAmount)
+    {
+        score += scoreAmount;
+        scoreDisplay.GetComponent<TextMeshProUGUI>().text = score.ToString();
     }
 
     

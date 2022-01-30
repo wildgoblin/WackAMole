@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9478027f918ae4cb6029f81e606e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreAmount: 100
   type: ice
   oppositeType: fire
   hitSFX:
@@ -236,6 +237,7 @@ MonoBehaviour:
   saveSFX:
   - {fileID: 8300000, guid: 6953c9a5b5be3994db5b3f621910a8df, type: 3}
   - {fileID: 8300000, guid: 668f99c42c403244b9bd47a4dfe032a7, type: 3}
+  happyHeartsFX: {fileID: 605355676587234608, guid: 572fa5d0f65e8594fb87c68894e19949, type: 3}
   bunnyHead: {fileID: 906455586}
   bunnyHands: {fileID: 1486491180}
   timeBeforeDestroy: 1

@@ -9,10 +9,12 @@ public class Bunny : MonoBehaviour
     GameController gameController;
     SpriteRenderer spriteRenderer;
 
+    [SerializeField] int scoreAmount = 100;
     [SerializeField] string type;
     [SerializeField] string oppositeType;
     [SerializeField] AudioClip[] hitSFX;
     [SerializeField] AudioClip[] saveSFX;
+    [SerializeField] GameObject happyHeartsFX;
 
     [SerializeField] SpriteRenderer bunnyHead;
     [SerializeField] SpriteRenderer bunnyHands;
@@ -37,6 +39,8 @@ public class Bunny : MonoBehaviour
         // Check for missing Audio
         foreach (AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
         bunnyHead = bunnyHead.GetComponent<SpriteRenderer>();
+
+        
     }
 
 
@@ -86,7 +90,7 @@ public class Bunny : MonoBehaviour
                 {
                     GetComponent<Animator>().SetTrigger("setIce");
                 }
-
+                PlayHitSFX();
                 gameController.LoseALife();
 
 
@@ -101,10 +105,14 @@ public class Bunny : MonoBehaviour
                 StartCoroutine(ChangeColor(Color.green));
                 GetComponent<Animator>().SetTrigger("saved");
                 PlayHitSFX();
+                gameController.AddToScoreAndUpdateDisplay(scoreAmount);
+                Instantiate(happyHeartsFX, gameObject.transform);
 
                 //Wait for time then cleanup and destroy
                 yield return new WaitForSeconds(timeBeforeDestroy);
                 CleanUpAndDestroyObject();
+
+                
             }
 
             //FAIL HIT If Type is different
@@ -114,7 +122,7 @@ public class Bunny : MonoBehaviour
                 StartCoroutine(ChangeColor(Color.red));
 
                 gameController.LoseALife();
-
+                
                 //Wait for time then cleanup and destroy
                 yield return new WaitForSeconds(failedHitTimeBeforeDestroy);
                 CleanUpAndDestroyObject();
@@ -145,6 +153,11 @@ public class Bunny : MonoBehaviour
         if (hitSFX.Length > 0)
         {
             PlayAudioClipSFX(hitSFX[Random.Range(0, hitSFX.Length)]);
+            
+        }
+        else if (saveSFX.Length > 0)
+        {
+            
             PlayAudioClipSFX(saveSFX[Random.Range(0, saveSFX.Length)]);
         }
         else
@@ -160,6 +173,8 @@ public class Bunny : MonoBehaviour
         AudioSource audio = GetComponent<AudioSource>();
         AudioSource.PlayClipAtPoint(SFX, Camera.main.transform.position);
     }
+
+    
     
 
 }
