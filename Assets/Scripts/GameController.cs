@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject hatsArea;
     [SerializeField] GameObject hat;
     [SerializeField] float revealTimeDelay = 1;
+    [SerializeField] GameObject CloudFX;
 
     List<int> spawnersAvailable = new List<int>();
 
@@ -68,9 +69,11 @@ public class GameController : MonoBehaviour
             int randomSpawner = Random.Range(0, spawnersAvailable.Count);
             int spawnerLocation = spawnersAvailable[randomSpawner];
 
+            Instantiate(CloudFX, hatsArea.transform.GetChild(spawnerLocation).transform);
             yield return new WaitForSeconds(timeDelay);
             hatsArea.transform.GetChild(spawnerLocation).GetComponent<Image>().enabled = true;
             RemoveFromAvailableSpawners(spawnerLocation);
+            Destroy(hatsArea.transform.GetChild(spawnerLocation).GetChild(0).gameObject);
         }
 
         StartGame();
