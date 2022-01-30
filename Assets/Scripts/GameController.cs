@@ -20,18 +20,21 @@ public class GameController : MonoBehaviour
     [SerializeField] float revealTimeDelay = 1;
     [SerializeField] GameObject CloudFX;
 
-    List<int> spawnersAvailable = new List<int>();
-
     [SerializeField] GameObject leftCurtain;
     [SerializeField] GameObject rightCurtain;
 
-    void Start()
+    List<int> spawnersAvailable = new List<int>();
+
+    bool gameStarted = false;
+
+
+    public void StartGame()
     {
+        gameStarted = true;
         SpawnLives();
         SpawnHats();
-        StartCoroutine(RevealHats(revealTimeDelay));
+        StartCoroutine(LoadMainGame(revealTimeDelay));
         //START GAME (In Coroutine)
-
     }
 
     private void SpawnLives()
@@ -57,7 +60,7 @@ public class GameController : MonoBehaviour
     }
 
 
-    private IEnumerator RevealHats(float timeDelay)
+    private IEnumerator LoadMainGame(float timeDelay)
     {
         leftCurtain.GetComponent<Animator>().SetTrigger("openCurtain");
         rightCurtain.GetComponent<Animator>().SetTrigger("openCurtain");
@@ -76,14 +79,14 @@ public class GameController : MonoBehaviour
             Destroy(hatsArea.transform.GetChild(spawnerLocation).GetChild(0).gameObject);
         }
 
-        StartGame();
+        StartSpawning();
 
 
     }
 
 
 
-    private void StartGame()
+    private void StartSpawning()
     {
         
         EnemySpawner enemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();
@@ -124,6 +127,11 @@ public class GameController : MonoBehaviour
             lives--;
             Debug.Log("Lives left" + lives);
         }
+    }
+
+    public bool GetGameStartState()
+    {
+        return gameStarted;
     }
 
     

@@ -7,6 +7,7 @@ public class Hammer : MonoBehaviour
 
     [SerializeField] string type;
 
+
     //References
     GameController gameController;
     void Awake()
@@ -17,8 +18,16 @@ public class Hammer : MonoBehaviour
     }
     void OnMouseDown()
     {
+        // Start Game if not yet started
+        if (!gameController.GetGameStartState())
+            { StartGameOnClick(); }
+
+        // Normal Gameplay
         gameController.SetHammerType(type);
     }
 
-
+    private void StartGameOnClick()
+    {
+            gameController.StartGame();
+    }
 }
