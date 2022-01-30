@@ -6,11 +6,6 @@ public class GameController : MonoBehaviour
 {
     string hammerType;
 
-    void Update()
-    {
-        Debug.Log("Hammer Type: " + hammerType);
-    }
-
     public void SetHammerType(string type)
     {
         hammerType = type;
