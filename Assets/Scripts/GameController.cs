@@ -67,7 +67,9 @@ public class GameController : MonoBehaviour
 
     private IEnumerator LoseGameCleanUp()
     {
-        //Do Lose condition
+        
+        //Stop Game
+        gameStarted = false;
         // Stop Spawn
         StopSpawning();
         // Clear Board
@@ -75,19 +77,26 @@ public class GameController : MonoBehaviour
         // Close curtains
         leftCurtain.GetComponent<Animator>().SetTrigger("closeCurtain");
         rightCurtain.GetComponent<Animator>().SetTrigger("closeCurtain");
+        
         yield return new WaitForSeconds(curtainDelayTime);
-        leftCurtain.GetComponent<Animator>().SetTrigger("stayOpen");
 
-        gameStarted = false;
-        mainStartScreen.SetActive(true);
+        //ResetCurtainTriggers
+        leftCurtain.GetComponent<Animator>().ResetTrigger("closeCurtain");
+        leftCurtain.GetComponent<Animator>().ResetTrigger("openCurtain");
+        rightCurtain.GetComponent<Animator>().ResetTrigger("closeCurtain");
+        rightCurtain.GetComponent<Animator>().ResetTrigger("openCurtain");
+        
+        
+
         //Reset Lives
         CleanUpLives();        
         
         //Reset Hats
         CleanUpHats();
         // Show Main screen
-        
-        
+        mainStartScreen.SetActive(true);
+
+
     }
 
     private void SpawnLives()
