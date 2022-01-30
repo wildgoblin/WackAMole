@@ -2008,7 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c934246b2b3b10549bc97a50f1d58865, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lives: 6
+  lives: 3
   hats: 9
   livesArea: {fileID: 1395531486}
   lifePrefab: {fileID: 2296476494471168675, guid: 287dc8ef3fc6f314fa9af874c0960a64, type: 3}

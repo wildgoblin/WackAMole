@@ -112,4 +112,18 @@ public class EnemySpawner : MonoBehaviour
     {
         spawn = false;
     }
+
+    public void RemoveAllSpawnedEnemies()
+    {
+        foreach (GameObject spawner in spawners)
+        {
+            
+            if(spawner.transform.childCount > 0)
+            {
+                spawner.transform.GetChild(0).GetComponent<Bunny>().CleanUpAndDestroyObject();
+            }
+            
+            
+        }
+    }
 }

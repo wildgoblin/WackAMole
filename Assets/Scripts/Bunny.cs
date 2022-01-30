@@ -134,7 +134,7 @@ public class Bunny : MonoBehaviour
         bunnyHands.color = Color.white;
     }
 
-    private void CleanUpAndDestroyObject()
+    public void CleanUpAndDestroyObject()
     {
         enemySpawner.AddToAvailableSpawners(position);
         Destroy(gameObject);
