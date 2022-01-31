@@ -34,6 +34,8 @@ public class GameController : MonoBehaviour
     List<int> spawnersAvailable = new List<int>();
 
     bool gameStarted = false;
+    bool gameResetting = false;
+    bool gameStarting = false;
     EnemySpawner enemySpawner;
 
 
@@ -45,6 +47,8 @@ public class GameController : MonoBehaviour
 
         // Initialize
         gameStarted = false;
+        gameResetting = false;
+        gameStarting = false;
         mainStartScreen.SetActive(true);
         //Reset Score
         score = 0;
@@ -52,12 +56,7 @@ public class GameController : MonoBehaviour
     }
     public void StartGame()
     {
-
-
-        //Initialize
-        remainingLives = lives;             
-        
-        gameStarted = true;
+        gameStarting = true;
         mainStartScreen.SetActive(false);
         StartCoroutine(LoadMainGame(revealTimeDelay));
         //START GAME (In Coroutine)
@@ -75,9 +74,10 @@ public class GameController : MonoBehaviour
 
     private IEnumerator LoseGameCleanUp()
     {
-        
-        //Stop Game
+        gameResetting = true;
         gameStarted = false;
+        //Stop Game
+        
         // Stop Spawn
         StopSpawning();
         // Clear Board
@@ -85,7 +85,10 @@ public class GameController : MonoBehaviour
         // Close curtains
         leftCurtain.GetComponent<Animator>().SetTrigger("closeCurtain");
         rightCurtain.GetComponent<Animator>().SetTrigger("closeCurtain");
+        //Reset Lives
+        CleanUpLives();
         
+
         yield return new WaitForSeconds(curtainDelayTime);
 
         //ResetCurtainTriggers
@@ -93,16 +96,17 @@ public class GameController : MonoBehaviour
         leftCurtain.GetComponent<Animator>().ResetTrigger("openCurtain");
         rightCurtain.GetComponent<Animator>().ResetTrigger("closeCurtain");
         rightCurtain.GetComponent<Animator>().ResetTrigger("openCurtain");
-        
-        
 
-        //Reset Lives
-        CleanUpLives();        
-        
-        //Reset Hats
         CleanUpHats();
+
+
+
+        //Reset Hats
+
         // Show Main screen
         mainStartScreen.SetActive(true);
+        
+        gameResetting = false;
 
 
     }
@@ -153,6 +157,9 @@ public class GameController : MonoBehaviour
 
         // Reset Score
         score = 0;
+
+        //Initialize
+        remainingLives = lives;
         AddToScoreAndUpdateDisplay(0);
 
         SpawnLives();
@@ -192,6 +199,8 @@ public class GameController : MonoBehaviour
             Destroy(hatsArea.transform.GetChild(spawnerLocation).GetChild(0).gameObject);
         }
 
+        gameStarted = true;
+        gameStarting = false;
         StartSpawning();
 
 
@@ -246,9 +255,20 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public bool GetGameStartState()
+    public bool GetAvailableToStart()
     {
-        return gameStarted;
+
+        //STARTING NEEDS FALSE
+
+        // Used by Hammer.cs
+        // Game is started or resetting 
+        if(!gameStarted && !gameResetting && !gameStarting)
+        {
+            Debug.Log("Game is STARTING");
+            return true; }
+        // Game is in not in a start phase
+        else
+        { return false; }
     }
 
     public void AddToScoreAndUpdateDisplay(int scoreAmount)

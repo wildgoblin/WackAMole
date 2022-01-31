@@ -64,15 +64,16 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minSpawnDelay, maxSpawnDelay));
 
             if (spawnersAvailable.Count == 0) { Debug.Log("No Spawners Available"); }
+            else if (!spawn) { break;  }
             else
             {
                 //Choose Random Bunny to spawn
                 int randomBunny = Random.Range(0, enemyPrefab.Length);
-                
+
                 //Get random spawn location out of AvailableSpawners
                 int randomSpawner = Random.Range(0, spawnersAvailable.Count);
                 int spawnerLocation = spawnersAvailable[randomSpawner];
-                
+
                 //Spawn bunny
                 GameObject bunny = Instantiate(
                     enemyPrefab[randomBunny],
@@ -117,13 +118,10 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (GameObject spawner in spawners)
         {
-            
-            if(spawner.transform.childCount > 0)
-            {
-                spawner.transform.GetChild(0).GetComponent<Bunny>().CleanUpAndDestroyObject();
+            foreach(Transform spawnerChild in spawner.transform)
+                {
+                Destroy(spawnerChild.gameObject);
             }
-            
-            
         }
     }
 }

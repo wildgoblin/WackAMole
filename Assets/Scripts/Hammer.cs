@@ -19,7 +19,7 @@ public class Hammer : MonoBehaviour
     void OnMouseDown()
     {
         // Start Game if not yet started
-        if (!gameController.GetGameStartState())
+        if (gameController.GetAvailableToStart())
             { StartGameOnClick(); }
 
         // Normal Gameplay
