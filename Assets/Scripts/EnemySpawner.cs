@@ -8,8 +8,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int minSpawnDelay;
     [SerializeField] int maxSpawnDelay;
 
-    List<int> spawnersAvailable = new List<int>();
 
+    
+    //Spawners
+    List<int> spawnersAvailable = new List<int>();
     List<GameObject> spawners = new List<GameObject>();
 
     bool spawn = false;

@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
      float curtainDelayTime = 3; // Keep at 3, Animation is 3 seconds.
 
     [SerializeField] GameObject mainStartScreen;
+    [SerializeField] GameObject hammers;
 
     List<int> spawnersAvailable = new List<int>();
 
@@ -237,6 +238,15 @@ public class GameController : MonoBehaviour
     public string GetHammerType()
     {
         return hammerType;
+    }
+
+    public void TurnOffHammerTypeAnimation()
+    {
+        foreach(Transform hammer in hammers.transform)
+        {
+
+            hammer.GetComponent<Animator>().SetBool("isActive", false);
+        }
     }
 
     public void LoseALife()
