@@ -40,9 +40,16 @@ public class Bunny : MonoBehaviour
         foreach (AudioClip SFX in hitSFX) { if (!SFX) { Debug.Log("MISSING AUDIO to " + this); } }
         bunnyHead = bunnyHead.GetComponent<SpriteRenderer>();
 
+        SetTimeToDisappear();
+
+
         
     }
 
+    private void SetTimeToDisappear()
+    {
+        timeBeforeDisappear -= gameController.GetDifficultySpeed();
+    }
 
     void Start()
     {

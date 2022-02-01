@@ -54,7 +54,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 7712010582577105121, guid: cdb455fbe011cd24f897f6b7e9553b2a, type: 3}
+      value: {fileID: 21300000, guid: c284e8f9787c9a54592d8e040665c256, type: 3}
     attribute: m_Sprite
     path: Hammer
     classID: 212
@@ -81,7 +81,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 7712010582577105121, guid: cdb455fbe011cd24f897f6b7e9553b2a, type: 3}
+    - {fileID: 21300000, guid: c284e8f9787c9a54592d8e040665c256, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

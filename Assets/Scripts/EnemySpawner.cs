@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] enemyPrefab;
-    [SerializeField] int minSpawnDelay;
-    [SerializeField] int maxSpawnDelay;
+    [SerializeField] float minSpawnDelay;
+    [SerializeField] float maxSpawnDelay;
 
 
     
@@ -125,5 +125,10 @@ public class EnemySpawner : MonoBehaviour
                 Destroy(spawnerChild.gameObject);
             }
         }
+    }
+
+    public void UpdateMaxSpawnSpeed(float newSpeed)
+    {
+        maxSpawnDelay -= newSpeed;
     }
 }

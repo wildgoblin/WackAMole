@@ -11,6 +11,13 @@ public class GameController : MonoBehaviour
     
     [SerializeField] int lives = 3;
     [SerializeField] int hats = 9;
+    [Tooltip("Difficulty in steps (e.g.20,40,60)")]
+    [SerializeField] int difficultyCheckpoint = 5;
+    [Tooltip("Multiplicative")]
+    [SerializeField] int scoreDifficultyModifier = 10;
+    [SerializeField] float speedIncreaseInterval = 1;
+    
+
     int remainingLives;
 
     [Header ("Lives")]
@@ -268,8 +275,6 @@ public class GameController : MonoBehaviour
     public bool GetAvailableToStart()
     {
 
-        //STARTING NEEDS FALSE
-
         // Used by Hammer.cs
         // Game is started or resetting 
         if(!gameStarted && !gameResetting && !gameStarting)
@@ -284,10 +289,41 @@ public class GameController : MonoBehaviour
     public void AddToScoreAndUpdateDisplay(int scoreAmount)
     {
         score += scoreAmount;
+        CheckDifficultyCheckpointAndUpdate(score);
+
         scoreDisplay.GetComponent<TextMeshProUGUI>().text = score.ToString();
     }
 
+    private void IncreaseSpeed()
+    {
+        enemySpawner.UpdateMaxSpawnSpeed(speedIncreaseInterval);
+        
+    }
+
+    private void CheckDifficultyCheckpointAndUpdate(int scoreAmount)
+    {
+        float scoreDifficulty = difficultyCheckpoint * scoreDifficultyModifier;
+        if (scoreAmount >= scoreDifficulty)
+        {
+            IncreaseSpeed();
+            IncreaseDifficultyCheckpoint();
+        }
+        
+    }
     
+
+    private void IncreaseDifficultyCheckpoint()
+    {
+        difficultyCheckpoint += difficultyCheckpoint;
+    }
+
+    public float GetDifficultySpeed()
+    {
+        return speedIncreaseInterval;
+    }
+
+
+
 
 
 }
